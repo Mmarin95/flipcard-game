@@ -15,34 +15,22 @@ const CARD_FACES = [
   "King",
 ];
 
-// Class confuses this.cards with get cards(). Name the properties different than methods.
 class Deck {
-  constructor(cards) {
-    this._cards = cards;
+  constructor(cards = freshCardsDeck()) {
+    this.cards = cards;
   }
 
   get numCards() {
-    return this._cards.length;
-  }
-
-  get cards() {
-    return this._cards;
+    return this.cards.length;
   }
 
   shuffle() {
-    const cards = this._cards;
-    let shuffledDeck = [];
-    for (let i = this.numCards - 1; i >= 0; i--) {
+    for (let i = this.numCards - 1; i > 0; i--) {
       const newPosition = Math.floor(Math.random() * (i + 1));
-      const oldValue = cards[newPosition];
-      // shuffledDeck[oldValue] = cards[i];
-      // shuffledDeck[i] = cards[newPosition];
-      [shuffledDeck[oldValue], shuffledDeck[i]] = [
-        cards[i],
-        cards[newPosition],
-      ];
+      const oldValue = this.cards[newPosition];
+      this.cards[newPosition] = this.cards[i];
+      this.cards[i] = oldValue;
     }
-    return shuffledDeck;
   }
 }
 
@@ -53,12 +41,14 @@ class Card {
   }
 }
 
-const cards = SUITS.flatMap((suit) => {
-  const card = CARD_FACES.map((face_card) => {
-    return new Card(suit, face_card);
+const freshCardsDeck = () => {
+  return SUITS.flatMap((suit) => {
+    return CARD_FACES.map((face_card) => {
+      return new Card(suit, face_card);
+    });
   });
-  return card;
-});
+};
 
-console.log(cards);
-const deck = new Deck(cards);
+const deck = new Deck();
+deck.shuffle()
+console.log(deck.cards);
