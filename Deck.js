@@ -45,8 +45,6 @@ class Card {
   }
 
   color(suit) {
-    console.log(suit, suit.includes("♦♥"));
-    // return suit.includes("♦♥") ? "red" : "black";
     return "♦♥".includes(suit) ? "red" : "black";
   }
 
