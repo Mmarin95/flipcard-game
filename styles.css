@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+#table {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.card-deck {
+  color: whitesmoke;
+  background-color: blue;
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  margin: 1rem;
+  width: 4rem;
+  height: 7rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  font-size: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.card-face::before,
+.card-face::after {
+  content: attr(data-value);
+  position: absolute;
+  font-size: 1rem;
+}
+
+.card-face::before {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.card-face::after {
+  right: 0.5rem;
+  bottom: 0.5rem;
+  transform: rotate(180deg);
+}
