@@ -1,5 +1,5 @@
 const SUITS = ["Club", "Diamond", "Heart", "Spades"];
-const FACE_CARDS = [
+const CARD_FACES = [
   "Ace",
   "2",
   "3",
@@ -15,32 +15,50 @@ const FACE_CARDS = [
   "King",
 ];
 
-const deck = SUITS.flatMap((suit) => {
-  const pair = FACE_CARDS.map((face_card) => {
-    return [suit, face_card];
+// Class confuses this.cards with get cards(). Name the properties different than methods.
+class Deck {
+  constructor(cards) {
+    this._cards = cards;
+  }
+
+  get numCards() {
+    return this._cards.length;
+  }
+
+  get cards() {
+    return this._cards;
+  }
+
+  shuffle() {
+    const cards = this._cards;
+    let shuffledDeck = [];
+    for (let i = this.numCards - 1; i >= 0; i--) {
+      const newPosition = Math.floor(Math.random() * (i + 1));
+      const oldValue = cards[newPosition];
+      // shuffledDeck[oldValue] = cards[i];
+      // shuffledDeck[i] = cards[newPosition];
+      [shuffledDeck[oldValue], shuffledDeck[i]] = [
+        cards[i],
+        cards[newPosition],
+      ];
+    }
+    return shuffledDeck;
+  }
+}
+
+class Card {
+  constructor(suit, card_face) {
+    this.suit = suit;
+    this.card_face = card_face;
+  }
+}
+
+const cards = SUITS.flatMap((suit) => {
+  const card = CARD_FACES.map((face_card) => {
+    return new Card(suit, face_card);
   });
-  return pair;
+  return card;
 });
 
-console.log("deck", deck);
-const shuffle = (deck) => {
-  let shuffledDeck = [];
-  const numCards = deck.length;
-
-  for (let i = numCards - 1; i >= 0; i--) {
-    const newPosition = Math.floor(Math.random() * (i + 1));
-    // console.log("i", i, "newPosition", newPosition);
-
-    const oldValue = deck[newPosition];
-    // console.log("oldValue", oldValue);
-
-    shuffledDeck[oldValue] = deck[i];
-    // console.log("Current", deck[i], "is in", newPosition, shuffledDeck[oldValue]);
-
-    shuffledDeck[i] = deck[newPosition];
-    // console.log("OldValue", deck[newPosition], "is in", i, shuffledDeck[i]);
-  }
-  return shuffledDeck;
-};
-
-console.log(shuffle(deck));
+console.log(cards);
+const deck = new Deck(cards);
