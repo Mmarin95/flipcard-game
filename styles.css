@@ -29,7 +29,6 @@ body {
   align-items: center;
   font-size: 2.5rem;
   color: white;
-  user-select: none;
 }
 
 .computer-deck {
@@ -87,7 +86,3 @@ body {
 .card.black {
   color: black;
 }
-
-
-
-
