@@ -44,14 +44,14 @@ class Card {
     this.card_face = card_face;
   }
 
-  color(suit) {
-    return "♦♥".includes(suit) ? "red" : "black";
+  get color() {
+    return "♦♥".includes(this.suit) ? "red" : "black";
   }
 
-  cardHTML() {
+  getHTML() {
     const cardDiv = document.createElement("div");
-    cardDiv.classList.add("card", "card-face", this.color(this.suit));
-    cardDiv.innerHTML = this.suit;
+    cardDiv.innerText = this.suit;
+    cardDiv.classList.add("card", this.color);
     cardDiv.dataset.value = `${this.card_face} ${this.suit}`;
     return cardDiv;
   }
