@@ -23,7 +23,18 @@ const playerDeckElement = document.querySelector(".player-deck");
 const textElement = document.querySelector(".text");
 let playerDeck, computerDeck, inRound, stop;
 
-document.addEventListener("click", () => {
+document.addEventListener("click", onClick);
+document.addEventListener("keydown", (event) => {
+  switch (event.code) {
+    case "Space":
+    case "Enter":
+      onClick();
+    default:
+      break;
+  }
+});
+
+function onClick() {
   if (stop) {
     startGame();
     return;
@@ -34,7 +45,7 @@ document.addEventListener("click", () => {
   } else {
     flipCards();
   }
-});
+}
 
 startGame();
 
