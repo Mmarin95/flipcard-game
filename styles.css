@@ -56,19 +56,19 @@ body {
   font-size: 4rem;
 }
 
-.card-face::before,
-.card-face::after {
+.card::before,
+.card::after {
   position: absolute;
   content: attr(data-value);
   font-size: 1rem;
 }
 
-.card-face::before {
+.card::before {
   top: 0.5rem;
   left: 0.5rem;
 }
 
-.card-face::after {
+.card::after {
   right: 0.5rem;
   bottom: 0.5rem;
   transform: rotate(180deg);
